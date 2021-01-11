@@ -17,7 +17,7 @@ public class Login {
 	private int loginId;
 	
 	
-	@Column
+	@Column(name="email")
 	private String userName;
 	
 	@Column

@@ -18,6 +18,8 @@
       
       <mapping class="com.xoriant.modals.Phone"/>  
       <mapping class="com.xoriant.modals.Login"/>  
+      <mapping class="com.xoriant.modals.Customer"/>  
+      <mapping class="com.xoriant.modals.Address"/>  
       
      
    </session-factory>

@@ -16,6 +16,13 @@ import com.xoriant.modals.Phone;
 @Controller
 public class PhoneController {
 	
+	@RequestMapping("/addPhone")
+	public ModelAndView addPhone() {
+		ModelAndView view = new ModelAndView();
+		view.setViewName("addPhone");		
+		return view;
+	}
+	
 	@RequestMapping("/add")
 	public ModelAndView add(HttpServletRequest req, HttpServletResponse res) {
 		
@@ -40,11 +47,11 @@ public class PhoneController {
 		phoneDAO.addPhone(phone);
 		
 //		System.out.println(phoneName + " " + brand + " " + model);
-		ModelAndView view = new ModelAndView();
-		view.setViewName("addPhone");
-		view.addObject("phone", phone);
+//		ModelAndView view = new ModelAndView();
+//		view.setViewName("addPhone");
+//		view.addObject("phone", phone);
 		
-		return view;
+		return new ModelAndView("redirect:/addPhone");
 	}
 	
 	@RequestMapping("/phone/{phoneId}")
