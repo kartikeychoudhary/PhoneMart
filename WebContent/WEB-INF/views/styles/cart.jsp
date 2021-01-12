@@ -57,20 +57,20 @@
         </div>
         <div class="sidebar-wrapper">
           <ul class="nav">
-            <li class="nav-item  active ">
-              <a class="nav-link" href="home">
+            <li class="nav-item">
+              <a class="nav-link" href="../home">
                 <i class="material-icons">home</i>
                 <p>Home</p>
               </a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" href="customerOrders">
+              <a class="nav-link" href="../customerOrders">
                 <i class="material-icons">person</i>
                 <p>Orders</p>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="customerCart">
+            <li class="nav-item active">
+              <a class="nav-link" href="../customerCart">
                 <i class="material-icons">content_paste</i>
                 <p>Cart</p>
               </a>
@@ -138,7 +138,7 @@
                   </span>
                    
                     <a href="phone/${phone.getPhoneId()}" class="btn btn-outline-primary ml-auto">
-                      View Details
+                      	
                     </a>
                   </div>
                 </div>

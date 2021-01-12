@@ -233,9 +233,13 @@
                     	Price &nbsp&nbsp
                       <i class="fa fa-inr"></i> ${phone.getCost()} 
                    </span>
-                    <button type="submit" href="edit/${phone.getPhoneId()}" class="btn btn-primary ml-auto">
+                    <a  href="../cart/${phone.getPhoneId()}" class="btn btn-primary ml-auto">
                       <i class="material-icons">create</i> Add to Cart
-                    </button>
+                    </a>
+                    
+                    <a  href="../order/${phone.getPhoneId()}" class="btn btn-success ml-auto">
+                      <i class="material-icons">create</i> Buy Now
+                    </a>
                   </div>
                 </div>
               </div>

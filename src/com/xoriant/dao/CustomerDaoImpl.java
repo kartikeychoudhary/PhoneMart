@@ -55,5 +55,18 @@ public class CustomerDaoImpl implements CustomerDao {
 		return customer;
 	}
 
+	@Override
+	public Customer getCustomer(Integer customerId) {
+		Customer customer = null;
+		Session session=factory.openSession();
+		Transaction txn=session.beginTransaction();
+		
+		customer = session.get(Customer.class, customerId);
+		
+		txn.commit();
+		session.close();
+		return customer;
+	}
+
 
 }

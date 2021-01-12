@@ -20,6 +20,8 @@
       <mapping class="com.xoriant.modals.Login"/>  
       <mapping class="com.xoriant.modals.Customer"/>  
       <mapping class="com.xoriant.modals.Address"/>  
+      <mapping class="com.xoriant.modals.Order"/>  
+      <mapping class="com.xoriant.modals.Cart"/>  
       
      
    </session-factory>

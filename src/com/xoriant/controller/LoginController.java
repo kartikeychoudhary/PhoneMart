@@ -3,6 +3,7 @@ package com.xoriant.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,7 @@ import com.xoriant.modals.Customer;
 import com.xoriant.modals.Login;
 
 @Controller
+@SessionAttributes("customerId")
 public class LoginController {
 	
 	
@@ -26,12 +28,15 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/customerHome",method=RequestMethod.POST)
-	public ModelAndView submitLoginForm(@RequestParam("userName") String userName,@RequestParam("password")String password) {
+	public ModelAndView submitLoginForm(@RequestParam("userName") String userName,@RequestParam("password")String password, ModelMap model) {
 		ModelAndView modelAndView=new ModelAndView("customerHome");
 		Login login=new Login();
 		
 		login.setUserName(userName);
 		login.setPassword(password);
+		
+		System.out.println(userName);
+		System.out.println(password);
 		
 //		AuthenticateDaoImpl authenticateDaoImpl=new AuthenticateDaoImpl();
 //		System.out.println(authenticateDaoImpl.addLoginDetails(login));
@@ -45,12 +50,14 @@ public class LoginController {
 		System.out.println();
 		
 		Customer customer = customerDaoImpl.fetchCustomer(userName);
+		model.addAttribute("customerId", customer.getCustId());
 		
 		modelAndView.addObject("msg", "Hello");
 		modelAndView.addObject("login",login);
 		
 		
-		return modelAndView;
+		return new ModelAndView("redirect:/home");
+//		return modelAndView;
 	}
 	
 	@RequestMapping(value="/customerReg", method=RequestMethod.GET)
@@ -61,7 +68,7 @@ public class LoginController {
 	
 	
 	
-	@RequestMapping(value="/customerLogin", method=RequestMethod.POST)
+	@RequestMapping(value="/customerLogin",  method=RequestMethod.POST)
 	public ModelAndView submitRegistrationForm(
 	        @RequestParam("name") String name,
 			@RequestParam("email") String email,
@@ -72,6 +79,7 @@ public class LoginController {
 			@RequestParam("state") String state,
 			@RequestParam("contactNo") double contactNo,
 			@RequestParam("password") String password
+			
    ){
 		ModelAndView modelAndView=new ModelAndView("loginForm");
 		Address address=new Address();
@@ -92,6 +100,7 @@ public class LoginController {
 		//to add customer
 		CustomerDaoImpl customerDaoImpl=new CustomerDaoImpl();
 		System.out.println(customerDaoImpl.addCustomer(customer));
+		
 		
 		//to add credential in login table
 		Login login=new Login();

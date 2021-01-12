@@ -57,7 +57,7 @@
         </div>
         <div class="sidebar-wrapper">
           <ul class="nav">
-            <li class="nav-item  active ">
+            <li class="nav-item">
               <a class="nav-link" href="home">
                 <i class="material-icons">home</i>
                 <p>Home</p>
@@ -69,7 +69,7 @@
                 <p>Orders</p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item  active ">
               <a class="nav-link" href="customerCart">
                 <i class="material-icons">content_paste</i>
                 <p>Cart</p>
