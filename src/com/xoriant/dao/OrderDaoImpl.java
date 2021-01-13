@@ -37,6 +37,16 @@ public class OrderDaoImpl implements OrderDao {
 		session.close();
 		return orderId;
 	}
+	
+	@Override
+	public void updateOrder(Order order) {
+		Session session=factory.openSession();
+		Transaction txn=session.beginTransaction();
+		session.update(order);
+		txn.commit();
+		session.close();
+	}
+	
 
 	@Override
 	public void deleteOrder(Integer orderId) {
@@ -94,6 +104,24 @@ public class OrderDaoImpl implements OrderDao {
 		
 		return order;
 	}
+
+	@Override
+	public List<Order> fetchAllOrders() {
+		List<Order> orders = null;
+		Session session=factory.openSession();
+		Transaction txn=session.beginTransaction();
+		
+		String hql = "from Order";
+		TypedQuery<Order> query=session.createQuery(hql);
+		
+		orders=query.getResultList();
+		
+		txn.commit();
+		session.close();
+		
+		return orders;
+	}
+
 	
 	
 	

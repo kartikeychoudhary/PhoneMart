@@ -55,6 +55,9 @@ public class LoginController {
 		modelAndView.addObject("msg", "Hello");
 		modelAndView.addObject("login",login);
 		
+		if(customer.getCustId() == 87) {
+			return new ModelAndView("redirect:/adminView");
+		}
 		
 		return new ModelAndView("redirect:/home");
 //		return modelAndView;

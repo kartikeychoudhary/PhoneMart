@@ -42,7 +42,7 @@
       <div
         class="sidebar"
         data-color="rose"
-        data-background-color="white"
+        data-background-color="black"
         data-image="http://localhost:8080/PhoneMart/resources/img/sidebar-1.jpg"
       >
         <!--
@@ -73,6 +73,13 @@
               <a class="nav-link" href="adminView">
                 <i class="material-icons">smartphone</i>
                 <p>View Phone</p>
+              </a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="adminOrder">
+                <i class="material-icons">store</i>
+                <p>Manage Orders</p>
               </a>
             </li>
           </ul>

@@ -40,7 +40,7 @@
       <div
         class="sidebar"
         data-color="danger"
-        data-background-color="white"
+        data-background-color="black"
         data-image="http://localhost:8080/PhoneMart/resources/img/sidebar-1.jpg"
       >
         <!--
@@ -56,19 +56,19 @@
         <div class="sidebar-wrapper">
           <ul class="nav">
             <li class="nav-item active">
-              <a class="nav-link" href="../home">
+              <a class="nav-link" href="/PhoneMart/home">
                 <i class="material-icons">home</i>
                 <p>Home</p>
               </a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" href="../addPhone">
+              <a class="nav-link" href="/PhoneMart/customerOrder">
                 <i class="material-icons">person</i>
                 <p>Orders</p>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../adminView">
+              <a class="nav-link" href="/PhoneMart/customerCart">
                 <i class="material-icons">content_paste</i>
                 <p>Cart</p>
               </a>

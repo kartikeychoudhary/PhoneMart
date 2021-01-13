@@ -39,8 +39,8 @@
     <div class="wrapper">
       <div
         class="sidebar"
-        data-color="purple"
-        data-background-color="white"
+        data-color="rose"
+        data-background-color="black"
         data-image="http://localhost:8080/PhoneMart/resources/img/sidebar-1.jpg"
       >
         <!--
@@ -63,14 +63,20 @@
             </li>
             <li class="nav-item active  ">
               <a class="nav-link" href="addPhone">
-                <i class="material-icons">person</i>
+                <i class="material-icons">phone</i>
                 <p>Add Phone</p>
               </a>
             </li>
             <li class="nav-item ">
               <a class="nav-link" href="adminView">
-                <i class="material-icons">content_paste</i>
+                <i class="material-icons">smartphone</i>
                 <p>View Phone</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="adminOrder">
+                <i class="material-icons">store</i>
+                <p>Manage Orders</p>
               </a>
             </li>
           </ul>

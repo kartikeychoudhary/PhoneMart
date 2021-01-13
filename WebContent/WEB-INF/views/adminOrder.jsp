@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -43,17 +43,21 @@
 			</div>
 			<div class="sidebar-wrapper">
 				<ul class="nav">
-					<li class="nav-item"><a class="nav-link" href="home"> <i
-							class="material-icons">home</i>
-							<p>Home</p>
+					<li class="nav-item "><a class="nav-link" href="dashboard">
+							<i class="material-icons">dashboard</i>
+							<p>Dashboard</p>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="addPhone">
+							<i class="material-icons">person</i>
+							<p>Add Phone</p>
+					</a></li>
+					<li class="nav-item "><a class="nav-link" href="adminView">
+							<i class="material-icons">content_paste</i>
+							<p>View Phone</p>
 					</a></li>
 					<li class="nav-item active"><a class="nav-link"
-						href="customerOrder"> <i class="material-icons">person</i>
-							<p>Orders</p>
-					</a></li>
-					<li class="nav-item  "><a class="nav-link"
-						href="customerCart"> <i class="material-icons">content_paste</i>
-							<p>Cart</p>
+						href="adminOrder"> <i class="material-icons">store</i>
+							<p>Manage Orders</p>
 					</a></li>
 				</ul>
 			</div>
@@ -62,101 +66,90 @@
 			<!-- Navbar -->
 			<nav
 				class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-			<div class="container-fluid">
-				<div class="navbar-wrapper">
-					<a class="navbar-brand" href="javascript:;">View Phones</a>
-				</div>
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					aria-controls="navigation-index" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="navbar-toggler-icon icon-bar"></span> <span
-						class="navbar-toggler-icon icon-bar"></span> <span
-						class="navbar-toggler-icon icon-bar"></span>
-				</button>
-				<div class="collapse navbar-collapse justify-content-end">
+				<div class="container-fluid">
+					<div class="navbar-wrapper">
+						<a class="navbar-brand" href="javascript:;">Edit Phone</a>
+					</div>
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						aria-controls="navigation-index" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="navbar-toggler-icon icon-bar"></span> <span
+							class="navbar-toggler-icon icon-bar"></span> <span
+							class="navbar-toggler-icon icon-bar"></span>
+					</button>
+					<div class="collapse navbar-collapse justify-content-end">
 
-					<ul class="navbar-nav">
+						<ul class="navbar-nav">
 
-						<li class="nav-item dropdown"><a class="nav-link"
-							href="javascript:;" id="navbarDropdownProfile"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="material-icons">person</i>
-								<p class="d-lg-none d-md-block">Account</p>
-						</a>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="navbarDropdownProfile">
-								<a class="dropdown-item" href="#">Profile</a> <a
-									class="dropdown-item" href="#">Settings</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
-							</div></li>
-					</ul>
+							<li class="nav-item dropdown"><a class="nav-link"
+								href="javascript:;" id="navbarDropdownProfile"
+								data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> <i class="material-icons">person</i>
+									<p class="d-lg-none d-md-block">Account</p>
+							</a>
+								<div class="dropdown-menu dropdown-menu-right"
+									aria-labelledby="navbarDropdownProfile">
+									<a class="dropdown-item" href="#">Profile</a> <a
+										class="dropdown-item" href="#">Settings</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#">Log out</a>
+								</div></li>
+						</ul>
+					</div>
 				</div>
-			</div>
 			</nav>
 			<!-- End Navbar -->
 			<div class="content">
 				<div class="container-fluid">
 					<div class="row">
-
-						<c:if test="${not empty phones}">
-							<c:forEach var="phone" items="${phones}" varStatus="loop">
-
-								<div class="col-md-4">
-									<div class="card card-chart">
-										<div class="card-header card-header-image text-center">
-											<img class="card-img-top mx-auto shadow-lg"
-												alt="Bootstrap Thumbnail First"
-												src="${phone.getImgUrl() }"
-												style="max-height: 150px; max-width: 120px">
-										</div>
-										<div class="card-body">
-											<h4 class="card-title">${ phone.getPhoneName() }</h4>
-											<p class="card-category">
-												<!-- <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p> -->
-												By ${phone.getBrand()}
-											<div class="table">
-												<table class="table table-sales">
-													<thead>
-														<th class="blockquote text-primary">Status</th>
-														<th class="blockquote text-success">Bill</th>
-													</thead>
-													<tbody>
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header card-header-primary">
+									<h4 class="card-title ">All Orders</h4>
+									<p class="card-category"></p>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table">
+											<thead class=" text-primary">
+												<th>OrderId</th>
+												<th>CustomerId</th>
+												<th>PhoneId</th>
+												<th>Bill</th>
+												<th>Status</th>
+												<th>View Details</th>
+											</thead>
+											<tbody>
+												<c:if test="${not empty orders}">
+													<c:forEach var="order" items="${orders}" varStatus="loop">
 														<tr>
-															<td class="blockquote">
-																${orders.get(loop.index).getStatus()}</td>
-															<td class="blockquote"><i class="fa fa-inr"></i>
-																${orders.get(loop.index).getBill()}</td>
+															<td>${ order.getOrderId() }</td>
+															<td>${ order.getCustomerId() }</td>
+															<td>${ order.getPhoneId() }</td>
+															<td>${ order.getBill() }</td>
+															<td class="text-primary">${ order.getStatus() }</td>
+															<td><a
+																href="adminOrderDetails/${ order.getOrderId()}/${ order.getCustomerId() }/${ order.getPhoneId() }">View
+																	Details</a></td>
 														</tr>
-													</tbody>
-												</table>
 
-												<a href="invoice/${orders.get(loop.index).getOrderId()}"
-													class="btn-sm btn-info btn-block text-center"> More
-													Details </a>
-											</div>
-											</p>
-										</div>
-										<div class="card-footer">
-											<a href="phone/2" class="btn btn-danger ml-auto"> Cancel
-												order </a>
-										</div>
+													</c:forEach>
+												</c:if>
+
+											</tbody>
+										</table>
 									</div>
 								</div>
-
-							</c:forEach>
-						</c:if>
-
-
-
-
-
+							</div>
+						</div>
 					</div>
+
 				</div>
 			</div>
-			<footer class="footer"> </footer>
 		</div>
+		<footer class="footer"> </footer>
+	</div>
 	</div>
 	<div class="fixed-plugin">
 		<div class="dropdown show-dropdown">
@@ -200,8 +193,7 @@
 				</a></li>
 				<li class="button-container"><a
 					href="https://www.creative-tim.com/product/material-dashboard"
-					target="_blank" class="btn btn-primary btn-block">Free
-						Download</a></li>
+					target="_blank" class="btn btn-primary btn-block">Free Download</a></li>
 				<!-- <li class="header-title">Want more components?</li>
             <li class="button-container">
                 <a href="https://www.creative-tim.com/product/material-dashboard-pro" target="_blank" class="btn btn-warning btn-block">
@@ -210,14 +202,13 @@
             </li> -->
 				<li class="button-container"><a
 					href="https://demos.creative-tim.com/material-dashboard/docs/2.1/getting-started/introduction.html"
-					target="_blank" class="btn btn-default btn-block">
-						View Documentation </a></li>
+					target="_blank" class="btn btn-default btn-block"> View
+						Documentation </a></li>
 				<li class="button-container github-star"><a
 					class="github-button"
 					href="https://github.com/creativetimofficial/material-dashboard"
 					data-icon="octicon-star" data-size="large" data-show-count="true"
-					aria-label="Star ntkme/github-buttons on GitHub">Star</a>
-				</li>
+					aria-label="Star ntkme/github-buttons on GitHub">Star</a></li>
 				<li class="header-title">Thank you for 95 shares!</li>
 				<li class="button-container text-center">
 					<button id="twitter" class="btn btn-round btn-twitter">

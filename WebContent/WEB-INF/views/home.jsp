@@ -42,7 +42,7 @@
       <div
         class="sidebar"
         data-color="rose"
-        data-background-color="white"
+        data-background-color="black"
         data-image="http://localhost:8080/PhoneMart/resources/img/sidebar-1.jpg"
       >
         <!--
