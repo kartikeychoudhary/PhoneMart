@@ -20,15 +20,28 @@ import com.xoriant.modals.Customer;
 import com.xoriant.modals.Order;
 import com.xoriant.modals.Phone;
 
+
+/**
+* Admin Controller which handles URL End-Points 
+* 			GET			/dashboard 
+* 			GET			/adminPhoneView
+* 			GET			/adminOrderView
+* 			GET			/adminOrderDetails/{orderId}/{customerId}/{phoneId}
+* 			POST 		/updateOrderDetails/{orderId}/{customerId}/{phoneId}  
+* @see      Views Rendered as per Url
+*/
+
 @Controller
 @SessionAttributes("customerId")
 public class AdminController {
 
-
+	/**
+	* @return Admin Dashboard : Details about customers, orders, revenue, canceled orders, daily sales and monthly orders.
+	*/
 	@RequestMapping("/dashboard")
-	public ModelAndView add(HttpServletRequest req, HttpServletResponse res) {
+	public ModelAndView dashboard(HttpServletRequest req, HttpServletResponse res) {
 		ModelAndView view = new ModelAndView();
-		view.setViewName("dashboard");
+		view.setViewName("Admin/dashboard");
 		
 		PhoneDaoImpl phoneDao = new PhoneDaoImpl();
 		List<Phone> phones = phoneDao.listPhones();
@@ -38,10 +51,13 @@ public class AdminController {
 		return view;
 	}
 	
-	@RequestMapping("/adminView")
+	/**
+	* @return Admin Phones View : All phones are displayed here.
+	*/
+	@RequestMapping("/adminPhoneView")
 	public ModelAndView adminView(HttpServletRequest req, HttpServletResponse res) {
 		ModelAndView view = new ModelAndView();
-		view.setViewName("adminView");
+		view.setViewName("Admin/adminPhoneView");
 		
 		PhoneDaoImpl phoneDao = new PhoneDaoImpl();
 		List<Phone> phones = phoneDao.listPhones();
@@ -51,29 +67,34 @@ public class AdminController {
 		return view;
 	}
 	
-	@RequestMapping("/adminOrder")
+	/**
+	* @return Admin Order View : Orders which are placed by customers are displayed here.
+	*/
+	@RequestMapping("/adminOrderView")
 	public ModelAndView adminOrderView(HttpServletRequest req, HttpServletResponse res, ModelMap model) {
 		Integer customerId = (Integer) model.get("customerId");
 		if(customerId == null) {
-			return new ModelAndView("redirect:/loginForm");
+			return new ModelAndView("redirect:/login");
 		}
 		
 		OrderDaoImpl orderDaoImpl = new OrderDaoImpl();
 		List<Order> orders = orderDaoImpl.fetchAllOrders();
         
 		ModelAndView view = new ModelAndView();
-		view.setViewName("adminOrder");
+		view.setViewName("Admin/adminOrderView");
 		view.addObject("orders", orders);
 
-		
 		return view;
 	}
 	
+	/**
+	* @return Admin Order Details : Order details like customer address, contact no. are displayed with invoice.
+	*/
 	@RequestMapping("/adminOrderDetails/{orderId}/{customerId}/{phoneId}")
 	public ModelAndView adminOrderDetailsView(@PathVariable(value="orderId") String orderId, @PathVariable(value="customerId") String customerId, @PathVariable(value="phoneId") String phoneId,HttpServletRequest req, HttpServletResponse res, ModelMap model) {
 		Integer adminId = (Integer) model.get("customerId");
 		if(adminId == null) {
-			return new ModelAndView("redirect:/loginForm");
+			return new ModelAndView("redirect:/login");
 		}
 		System.out.println(orderId + " " + customerId + " " + phoneId );
 		
@@ -85,10 +106,9 @@ public class AdminController {
 		
 		CustomerDaoImpl customerDaoImpl = new CustomerDaoImpl();
 		Customer customer = customerDaoImpl.getCustomer(Integer.parseInt(customerId));
-//		List<Order> orders = orderDaoImpl.fetchAllOrders();
-//        
+     
 		ModelAndView view = new ModelAndView();
-		view.setViewName("adminOrderDetails");
+		view.setViewName("Admin/adminOrderDetails");
 
 		view.addObject("order", order);
 		view.addObject("phone", phone);
@@ -98,13 +118,16 @@ public class AdminController {
 		return view;
 	}
 	
+	/**
+	* @param orderId, customerId, phoneId 
+	* @return Update Order details : Admin can update the status for order and also can cancel them.
+	*/
 	@RequestMapping(value="/updateOrderDetails/{orderId}/{customerId}/{phoneId}", method=RequestMethod.POST)
 	public ModelAndView adminUpdateOrderDetailsView(@PathVariable(value="orderId") String orderId, @PathVariable(value="customerId") String customerId, @PathVariable(value="phoneId") String phoneId,HttpServletRequest req, HttpServletResponse res, ModelMap model) {
 		Integer adminId = (Integer) model.get("customerId");
 		if(adminId == null) {
-			return new ModelAndView("redirect:/loginForm");
+			return new ModelAndView("redirect:/login");
 		}
-		// System.out.println(orderId + " " + customerId + " " + phoneId );
 		
 		OrderDaoImpl orderDaoImpl = new OrderDaoImpl();
 		Order order = orderDaoImpl.getOrder(Integer.parseInt(orderId));

@@ -57,5 +57,9 @@ public class AuthenticateDaoImpl implements AuthenticateDao {
 		return loginobj;
 		
 	}
+	
+	public Integer getAdminId() {
+		return 87;
+	}
 
 }

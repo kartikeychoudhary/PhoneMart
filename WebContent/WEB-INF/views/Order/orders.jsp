@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -28,7 +30,7 @@
 
 <body class="">
 	<div class="wrapper">
-		<div class="sidebar" data-color="green" data-background-color="black"
+		<div class="sidebar" data-color="rose" data-background-color="black"
 			data-image="http://localhost:8080/PhoneMart/resources/img/sidebar-1.jpg">
 			<!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
@@ -41,17 +43,17 @@
 			</div>
 			<div class="sidebar-wrapper">
 				<ul class="nav">
-					<li class="nav-item "><a class="nav-link" href="../dashboard">
-							<i class="material-icons">dashboard</i>
-							<p>Dashboard</p>
+					<li class="nav-item"><a class="nav-link" href="home"> <i
+							class="material-icons">home</i>
+							<p>Home</p>
 					</a></li>
-					<li class="nav-item active  "><a class="nav-link"
-						href="../addPhone"> <i class="material-icons">phone</i>
-							<p>Edit Phone</p>
+					<li class="nav-item active"><a class="nav-link"
+						href="customerOrder"> <i class="material-icons">person</i>
+							<p>Orders</p>
 					</a></li>
-					<li class="nav-item "><a class="nav-link" href="../adminView">
-							<i class="material-icons">smartphone</i>
-							<p>View Phone</p>
+					<li class="nav-item  "><a class="nav-link"
+						href="customerCart"> <i class="material-icons">content_paste</i>
+							<p>Cart</p>
 					</a></li>
 				</ul>
 			</div>
@@ -60,175 +62,95 @@
 			<!-- Navbar -->
 			<nav
 				class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-				<div class="container-fluid">
-					<div class="navbar-wrapper">
-						<a class="navbar-brand" href="javascript:;">Edit Phone</a>
-					</div>
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						aria-controls="navigation-index" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="navbar-toggler-icon icon-bar"></span> <span
-							class="navbar-toggler-icon icon-bar"></span> <span
-							class="navbar-toggler-icon icon-bar"></span>
-					</button>
-					<div class="collapse navbar-collapse justify-content-end">
-
-						<ul class="navbar-nav">
-
-							<li class="nav-item dropdown"><a class="nav-link"
-								href="javascript:;" id="navbarDropdownProfile"
-								data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false"> <i class="material-icons">person</i>
-									<p class="d-lg-none d-md-block">Account</p>
-							</a>
-								<div class="dropdown-menu dropdown-menu-right"
-									aria-labelledby="navbarDropdownProfile">
-									<a class="dropdown-item" href="#">Profile</a> <a
-										class="dropdown-item" href="#">Settings</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#">Log out</a>
-								</div></li>
-						</ul>
-					</div>
+			<div class="container-fluid">
+				<div class="navbar-wrapper">
+					<a class="navbar-brand" href="javascript:;">View Phones</a>
 				</div>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					aria-controls="navigation-index" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="navbar-toggler-icon icon-bar"></span> <span
+						class="navbar-toggler-icon icon-bar"></span> <span
+						class="navbar-toggler-icon icon-bar"></span>
+				</button>
+				<div class="collapse navbar-collapse justify-content-end">
+
+					<ul class="navbar-nav">
+
+						<li class="nav-item dropdown"><a class="nav-link"
+							href="javascript:;" id="navbarDropdownProfile"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="material-icons">person</i>
+								<p class="d-lg-none d-md-block">Account</p>
+						</a>
+							<div class="dropdown-menu dropdown-menu-right"
+								aria-labelledby="navbarDropdownProfile">
+								<a class="dropdown-item" href="#">Profile</a> <a
+									class="dropdown-item" href="#">Settings</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Log out</a>
+							</div></li>
+					</ul>
+				</div>
+			</div>
 			</nav>
 			<!-- End Navbar -->
 			<div class="content">
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-md-12">
-							<div class="card">
-								<div class="card-header card-header-success">
-									<h4 class="card-title">Edit Phone</h4>
-									<p class="card-category">Fill form and submit</p>
+
+						<c:if test="${not empty phones}">
+							<c:forEach var="phone" items="${phones}" varStatus="loop">
+
+								<div class="col-md-4">
+									<div class="card card-chart">
+										<div class="card-header card-header-image text-center">
+											<img class="card-img-top mx-auto shadow-lg"
+												alt="Bootstrap Thumbnail First"
+												src="${phone.getImgUrl() }"
+												style="max-height: 150px; max-width: 120px">
+										</div>
+										<div class="card-body">
+											<h4 class="card-title">${ phone.getPhoneName() }</h4>
+											<p class="card-category">
+												<!-- <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p> -->
+												By ${phone.getBrand()}
+											<div class="table">
+												<table class="table table-sales">
+													<thead>
+														<th class="blockquote text-primary">Status</th>
+														<th class="blockquote text-success">Bill</th>
+													</thead>
+													<tbody>
+														<tr>
+															<td class="blockquote">
+																${orders.get(loop.index).getStatus()}</td>
+															<td class="blockquote"><i class="fa fa-inr"></i>
+																${orders.get(loop.index).getBill()}</td>
+														</tr>
+													</tbody>
+												</table>
+
+												<a href="invoice/${orders.get(loop.index).getOrderId()}"
+													class="btn-sm btn-info btn-block text-center"> More
+													Details </a>
+											</div>
+											</p>
+										</div>
+										<div class="card-footer">
+											<a href="/PhoneMart/cancleOrderCustomer/${orders.get(loop.index).getOrderId()}" class="btn btn-danger ml-auto"> Cancel
+												order </a>
+										</div>
+									</div>
 								</div>
-								<div class="card-body">
-									<form action="/PhoneMart/update/${phone.getPhoneId()}">
-										<div class="row">
-											<div class="col-md-5">
-												<div class="form-group">
-													<label class="bmd-label-floating">Phone
-														Name</label> <input type="text" name="phoneName"
-														value="${ phone.getPhoneName() }" class="form-control" />
-												</div>
-											</div>
-											<div class="col-md-3">
-												<div class="form-group">
-													<label class="bmd-label-floating">Brand</label> <input
-														type="text" name="brand" value="${phone.getBrand()}"
-														class="form-control" />
-												</div>
-											</div>
-											<div class="col-md-4">
-												<div class="form-group">
-													<label class="bmd-label-floating">Model</label>
-													<input type="text" name="model" value="${phone.getModel()}"
-														class="form-control" />
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group">
-													<label class="bmd-label-floating">Color</label> <input
-														type="text" name="color"
-														value="${phone.getFeatures().getColor()}"
-														class="form-control" />
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label class="bmd-label-floating">Dimensions</label> <input
-														type="text" name="dimensions"
-														value="${phone.getFeatures().getDimensions()}"
-														class="form-control" />
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-12">
-												<div class="form-group">
-													<label class="bmd-label-floating">Image Url</label> <input
-														type="text" name="imgUrl" value="${phone.getImgUrl()}"
-														class="form-control" />
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-4">
-												<div class="form-group">
-													<label class="bmd-label-floating">Cost</label> <input
-														type="text" name="cost" value="${phone.getCost()}"
-														class="form-control" />
-												</div>
-											</div>
-											<div class="col-md-8">
-												<div class="form-group">
-													<label class="bmd-label-floating">Processor</label> <input
-														type="text" name="processor"
-														value="${phone.getFeatures().getProcessor()}"
-														class="form-control" />
-												</div>
-											</div>
 
-											<div class="col-md-6">
-												<div class="form-group">
-													<label class="bmd-label-floating">Main Camera</label> <input
-														type="text" name="mainCamera"
-														value="${phone.getFeatures().getMainCamera()}"
-														class="form-control" />
-												</div>
-											</div>
+							</c:forEach>
+						</c:if>
 
-											<div class="col-md-6">
-												<div class="form-group">
-													<label class="bmd-label-floating">Selfie Camera</label> <input
-														type="text" name="selfieCamera"
-														value="${phone.getFeatures().getSelfieCamera()}"
-														class="form-control" />
-												</div>
-											</div>
 
-											<div class="col-md-6">
-												<div class="form-group">
-													<label class="bmd-label-floating">Battery</label>
-													<input type="text" name="battery"
-														value="${phone.getFeatures().getBattery()}"
-														class="form-control" />
-												</div>
-											</div>
 
-											<div class="col-md-6">
-												<div class="form-group">
-													<label class="bmd-label-floating">Memory</label>
-													<input type="text" name="memory"
-														value="${phone.getFeatures().getMemory()}"
-														class="form-control" />
-												</div>
-											</div>
 
-											<div class="col-md-6">
-												<div class="form-group">
-													<label class="bmd-label-floating">OS</label>
-													<input type="text" name="os"
-														value="${phone.getFeatures().getOs()}"
-														class="form-control" />
-												</div>
-											</div>
-										</div>
-										<div class="row"></div>
-										<a href="delete/${phone.getPhoneId()}"
-											class="btn btn-danger ml-auto"> <i
-											class="material-icons">delete</i> Delete Phone
-										</a>
-										<button type="submit" class="btn btn-success pull-right">
-											Update Phone</button>
-										<div class="clearfix"></div>
-									</form>
-								</div>
-							</div>
-						</div>
 
 					</div>
 				</div>

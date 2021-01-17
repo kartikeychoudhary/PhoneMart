@@ -10,4 +10,6 @@ public interface PhoneDao {
 	public void deletePhone(Integer phoneId);
 	public List<Phone> listPhones();
 	public Phone getPhone(Integer phoneId);
+	public List<Phone> listPhonesByBrand(String Brand);
+
 }

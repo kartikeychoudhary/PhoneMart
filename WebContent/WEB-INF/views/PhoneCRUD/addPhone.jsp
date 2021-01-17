@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
   <head>
@@ -57,22 +55,28 @@
         </div>
         <div class="sidebar-wrapper">
           <ul class="nav">
-            <li class="nav-item  active ">
-              <a class="nav-link" href="home">
-                <i class="material-icons">home</i>
-                <p>Home</p>
+            <li class="nav-item ">
+              <a class="nav-link" href="/PhoneMart/dashboard">
+                <i class="material-icons">dashboard</i>
+                <p>Dashboard</p>
+              </a>
+            </li>
+            <li class="nav-item active  ">
+              <a class="nav-link" href="/PhoneMart/addPhone">
+                <i class="material-icons">phone</i>
+                <p>Add Phone</p>
               </a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" href="customerOrders">
-                <i class="material-icons">person</i>
-                <p>Orders</p>
+              <a class="nav-link" href="/PhoneMart/adminPhoneView">
+                <i class="material-icons">smartphone</i>
+                <p>View Phone</p>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="customerCart">
-                <i class="material-icons">content_paste</i>
-                <p>Cart</p>
+              <a class="nav-link" href="/PhoneMart/adminOrderView">
+                <i class="material-icons">store</i>
+                <p>Manage Orders</p>
               </a>
             </li>
           </ul>
@@ -83,7 +87,7 @@
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
           <div class="container-fluid">
             <div class="navbar-wrapper">
-              <a class="navbar-brand" href="javascript:;">View Phones</a>
+              <a class="navbar-brand" href="javascript:;">Add Phone</a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
               <span class="sr-only">Toggle navigation</span>
@@ -117,37 +121,127 @@
         <div class="content">
           <div class="container-fluid">
             <div class="row">
-             
-              <c:if test="${not empty phones}">
-				        <c:forEach var=	"phone" items="${phones}" >
-
-              <div class="col-md-4">
-                <div class="card card-chart">
-                  <div class="card-header card-header-image text-center">
-                    <img class="card-img-top mx-auto shadow-lg" alt="Bootstrap Thumbnail First" src="${phone.getImgUrl()}" style="max-height: 150px; max-width: 120px">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title">Add Phone</h4>
+                    <p class="card-category">Fill form and submit</p>
                   </div>
                   <div class="card-body">
-                    <h4 class="card-title">${ phone.getPhoneName() }</h4>
-                    <p class="card-category">
-                      <!-- <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p> -->
-                      By ${phone.getBrand()}
-                    </div>
-                  <div class="card-footer">
-                  <span class="h5">
-                  	 <i class="fa fa-inr"></i> ${phone.getCost()} &nbsp
-                  </span>
-                   
-                    <a href="phone/${phone.getPhoneId()}" class="btn btn-outline-primary ml-auto">
-                      View Details
-                    </a>
+                    <form action="/PhoneMart/addPhone" method="post">
+                      <div class="row">
+                        <div class="col-md-5">
+                          <div class="form-group">
+                            <label class="bmd-label-floating"
+                              >Phone Name</label
+                            >
+                            <input type="text" name="phoneName"  class="form-control" />
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Brand</label>
+                            <input type="text" name="brand" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="bmd-label-floating"
+                              >Model</label
+                            >
+                            <input type="text" name="model"  class="form-control" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Color</label>
+                            <input type="text" name="color"  class="form-control" />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Dimensions</label>
+                            <input type="text" name="dimensions"  class="form-control" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Image Url</label>
+                            <input type="text" name="imgUrl"  class="form-control" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Cost</label>
+                            <input type="text"  name="cost"  class="form-control" />
+                          </div>
+                        </div>
+                        <div class="col-md-8">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Processor</label>
+                            <input type="text" name="processor"  class="form-control" />
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Main Camera</label>
+                            <input type="text" name="mainCamera"  class="form-control" />
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Selfie Camera</label>
+                            <input type="text" name="selfieCamera"  class="form-control" />
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="bmd-label-floating"
+                              >Battery</label
+                            >
+                            <input type="text" name="battery"  class="form-control" />
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="bmd-label-floating"
+                              >Memory</label
+                            >
+                            <input type="text" name="memory"  class="form-control" />
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="bmd-label-floating"
+                              >OS</label
+                            >
+                            <input type="text" name="os"  class="form-control" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        
+                      </div>
+                      <button type="submit" name="button" class="btn btn-primary pull-right">
+                        Add Phone
+                      </button>
+                      <div class="clearfix"></div>
+                    </form>
                   </div>
                 </div>
               </div>
-
-            </c:forEach>
-          </c:if>
               
-
             </div>
           </div>
         </div>

@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -30,7 +28,7 @@
 
 <body class="">
 	<div class="wrapper">
-		<div class="sidebar" data-color="rose" data-background-color="black"
+		<div class="sidebar" data-color="danger" data-background-color="black"
 			data-image="http://localhost:8080/PhoneMart/resources/img/sidebar-1.jpg">
 			<!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
@@ -43,16 +41,16 @@
 			</div>
 			<div class="sidebar-wrapper">
 				<ul class="nav">
-					<li class="nav-item"><a class="nav-link" href="home"> <i
-							class="material-icons">home</i>
+					<li class="nav-item active"><a class="nav-link"
+						href="/PhoneMart/home"> <i class="material-icons">home</i>
 							<p>Home</p>
 					</a></li>
-					<li class="nav-item active"><a class="nav-link"
-						href="customerOrder"> <i class="material-icons">person</i>
+					<li class="nav-item "><a class="nav-link"
+						href="/PhoneMart/customerOrders"> <i class="material-icons">person</i>
 							<p>Orders</p>
 					</a></li>
-					<li class="nav-item  "><a class="nav-link"
-						href="customerCart"> <i class="material-icons">content_paste</i>
+					<li class="nav-item"><a class="nav-link"
+						href="/PhoneMart/customerCart"> <i class="material-icons">content_paste</i>
 							<p>Cart</p>
 					</a></li>
 				</ul>
@@ -64,7 +62,7 @@
 				class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
 			<div class="container-fluid">
 				<div class="navbar-wrapper">
-					<a class="navbar-brand" href="javascript:;">View Phones</a>
+					<a class="navbar-brand" href="javascript:;">${ phone.getPhoneName() }</a>
 				</div>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					aria-controls="navigation-index" aria-expanded="false"
@@ -100,202 +98,149 @@
 				<div class="container-fluid">
 					<div class="row">
 
-						<c:if test="${not empty phones}">
-							<c:forEach var="phone" items="${phones}" varStatus="loop">
+						<div class="col-md-12">
+							<div class="card card-chart">
+								<div class="card-header card-header-image text-center">
+									<img class="card-img-top mx-auto shadow-lg"
+										alt="Bootstrap Thumbnail First" src="${ phone.getImgUrl() }"
+										style="max-height: 150px; max-width: 120px">
+								</div>
+								<div class="card-body">
+									<h4 class="card-title">${ phone.getPhoneName() }</h4>
+									<div class="row">
 
-								<div class="col-md-4">
-									<div class="card card-chart">
-										<div class="card-header card-header-image text-center">
-											<img class="card-img-top mx-auto shadow-lg"
-												alt="Bootstrap Thumbnail First"
-												src="${phone.getImgUrl() }"
-												style="max-height: 150px; max-width: 120px">
-										</div>
-										<div class="card-body">
-											<h4 class="card-title">${ phone.getPhoneName() }</h4>
-											<p class="card-category">
-												<!-- <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p> -->
-												By ${phone.getBrand()}
-											<div class="table">
-												<table class="table table-sales">
-													<thead>
-														<th class="blockquote text-primary">Status</th>
-														<th class="blockquote text-success">Bill</th>
-													</thead>
-													<tbody>
-														<tr>
-															<td class="blockquote">
-																${orders.get(loop.index).getStatus()}</td>
-															<td class="blockquote"><i class="fa fa-inr"></i>
-																${orders.get(loop.index).getBill()}</td>
-														</tr>
-													</tbody>
-												</table>
+										<dl class="row p-4">
+											<dt class="col-sm-3 text-primary">Brand</dt>
+											<dd class="col-sm-9">${ phone.getBrand() }</dd>
 
-												<a href="invoice/${orders.get(loop.index).getOrderId()}"
-													class="btn-sm btn-info btn-block text-center"> More
-													Details </a>
+											<dt class="col-sm-3 text-primary">Cost</dt>
+											<dd class="col-sm-9">
+												${phone.getCost()}
+											</dd>
+
+											<dt class="col-sm-3 text-primary">Model</dt>
+											<dd class="col-sm-9">${phone.getModel()}</dd>
+											
+											<dt class="col-sm-3 text-primary">Color</dt>
+											<dd class="col-sm-9">${phone.getFeatures().getColor()}</dd>
+											
+											<dt class="col-sm-3 text-primary">Dimensions</dt>
+											<dd class="col-sm-9">${phone.getFeatures().getDimensions()}</dd>
+											
+											<dt class="col-sm-3 text-primary">Processor</dt>
+											<dd class="col-sm-9">${phone.getFeatures().getProcessor()}</dd>
+											
+											<dt class="col-sm-3 text-primary">Main Camera</dt>
+											<dd class="col-sm-9">${phone.getFeatures().getMainCamera()}</dd>
+											
+											<dt class="col-sm-3 text-primary">Selfie Camera</dt>
+											<dd class="col-sm-9">${phone.getFeatures().getSelfieCamera()}</dd>
+											
+											<dt class="col-sm-3 text-primary">Battery</dt>
+											<dd class="col-sm-9">${phone.getFeatures().getBattery()}</dd>
+											
+											<dt class="col-sm-3 text-primary">Memory</dt>
+											<dd class="col-sm-9">${phone.getFeatures().getMemory()}</dd>
+											
+											<dt class="col-sm-3 text-primary">Os</dt>
+											<dd class="col-sm-9">${phone.getFeatures().getOs()}</dd>
+
+											
+										</dl>
+
+
+												<hr>
+												<div class="card-footer w-100">
+
+													<span class="h5"> Price &nbsp&nbsp <i
+														class="fa fa-inr"></i> ${phone.getCost()}
+													</span> <a href="../cart/${phone.getPhoneId()}"
+														class="btn btn-primary ml-auto"> <i
+														class="material-icons">create</i> Add to Cart
+													</a> <a href="../order/${phone.getPhoneId()}"
+														class="btn btn-success ml-auto"> <i
+														class="material-icons">create</i> Buy Now
+													</a>
+												</div>
 											</div>
-											</p>
 										</div>
-										<div class="card-footer">
-											<a href="phone/2" class="btn btn-danger ml-auto"> Cancel
-												order </a>
-										</div>
+
 									</div>
 								</div>
-
-							</c:forEach>
-						</c:if>
-
-
-
-
-
-					</div>
-				</div>
-			</div>
-			<footer class="footer"> </footer>
-		</div>
-	</div>
-	<div class="fixed-plugin">
-		<div class="dropdown show-dropdown">
-			<a href="#" data-toggle="dropdown"> <i class="fa fa-cog fa-2x">
-			</i>
-			</a>
-			<ul class="dropdown-menu">
-				<li class="header-title">Sidebar Filters</li>
-				<li class="adjustments-line"><a href="javascript:void(0)"
-					class="switch-trigger active-color">
-						<div class="badge-colors ml-auto mr-auto">
-							<span class="badge filter badge-purple" data-color="purple"></span>
-							<span class="badge filter badge-azure" data-color="azure"></span>
-							<span class="badge filter badge-green" data-color="green"></span>
-							<span class="badge filter badge-warning" data-color="orange"></span>
-							<span class="badge filter badge-danger" data-color="danger"></span>
-							<span class="badge filter badge-rose active" data-color="rose"></span>
+							</div>
+							<footer class="footer"> </footer>
 						</div>
-						<div class="clearfix"></div>
-				</a></li>
-				<li class="header-title">Images</li>
-				<li class="active"><a class="img-holder switch-trigger"
-					href="javascript:void(0)"> <img
-						src="http://localhost:8080/PhoneMart/resources/img/sidebar-1.jpg"
-						alt="" />
-				</a></li>
-				<li><a class="img-holder switch-trigger"
-					href="javascript:void(0)"> <img
-						src="http://localhost:8080/PhoneMart/resources/img/sidebar-2.jpg"
-						alt="" />
-				</a></li>
-				<li><a class="img-holder switch-trigger"
-					href="javascript:void(0)"> <img
-						src="http://localhost:8080/PhoneMart/resources/img/sidebar-3.jpg"
-						alt="" />
-				</a></li>
-				<li><a class="img-holder switch-trigger"
-					href="javascript:void(0)"> <img
-						src="http://localhost:8080/PhoneMart/resources/img/sidebar-4.jpg"
-						alt="" />
-				</a></li>
-				<li class="button-container"><a
-					href="https://www.creative-tim.com/product/material-dashboard"
-					target="_blank" class="btn btn-primary btn-block">Free
-						Download</a></li>
-				<!-- <li class="header-title">Want more components?</li>
-            <li class="button-container">
-                <a href="https://www.creative-tim.com/product/material-dashboard-pro" target="_blank" class="btn btn-warning btn-block">
-                  Get the pro version
-                </a>
-            </li> -->
-				<li class="button-container"><a
-					href="https://demos.creative-tim.com/material-dashboard/docs/2.1/getting-started/introduction.html"
-					target="_blank" class="btn btn-default btn-block">
-						View Documentation </a></li>
-				<li class="button-container github-star"><a
-					class="github-button"
-					href="https://github.com/creativetimofficial/material-dashboard"
-					data-icon="octicon-star" data-size="large" data-show-count="true"
-					aria-label="Star ntkme/github-buttons on GitHub">Star</a>
-				</li>
-				<li class="header-title">Thank you for 95 shares!</li>
-				<li class="button-container text-center">
-					<button id="twitter" class="btn btn-round btn-twitter">
-						<i class="fa fa-twitter"></i> &middot; 45
-					</button>
-					<button id="facebook" class="btn btn-round btn-facebook">
-						<i class="fa fa-facebook-f"></i> &middot; 50
-					</button> <br /> <br />
-				</li>
-			</ul>
-		</div>
-	</div>
-	<!--   Core JS Files   -->
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/core/jquery.min.js"></script>
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/core/popper.min.js"></script>
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/core/bootstrap-material-design.min.js"></script>
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-	<!-- Plugin for the momentJs  -->
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/plugins/moment.min.js"></script>
-	<!--  Plugin for Sweet Alert -->
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/plugins/sweetalert2.js"></script>
-	<!-- Forms Validations Plugin -->
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/plugins/jquery.validate.min.js"></script>
-	<!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/plugins/jquery.bootstrap-wizard.js"></script>
-	<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/plugins/bootstrap-selectpicker.js"></script>
-	<!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/plugins/bootstrap-datetimepicker.min.js"></script>
-	<!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/plugins/jquery.dataTables.min.js"></script>
-	<!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/plugins/bootstrap-tagsinput.js"></script>
-	<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/plugins/jasny-bootstrap.min.js"></script>
-	<!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/plugins/fullcalendar.min.js"></script>
-	<!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/plugins/jquery-jvectormap.js"></script>
-	<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/plugins/nouislider.min.js"></script>
-	<!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
-	<!-- Library for adding dinamically elements -->
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/plugins/arrive.min.js"></script>
-	<!--  Google Maps Plugin    -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-	<!-- Chartist JS -->
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/plugins/chartist.min.js"></script>
-	<!--  Notifications Plugin    -->
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/plugins/bootstrap-notify.js"></script>
-	<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-	<script
-		src="http://localhost:8080/PhoneMart/resources/js/material-dashboard.js?v=2.1.2"
-		type="text/javascript"></script>
-	<!-- Material Dashboard DEMO methods, don't include it in your project! -->
-	<script src="http://localhost:8080/PhoneMart/resources/demo/demo.js"></script>
-	<script>
+					</div>
+
+
+					<!--   Core JS Files   -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/core/jquery.min.js"></script>
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/core/popper.min.js"></script>
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/core/bootstrap-material-design.min.js"></script>
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+					<!-- Plugin for the momentJs  -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/plugins/moment.min.js"></script>
+					<!--  Plugin for Sweet Alert -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/plugins/sweetalert2.js"></script>
+					<!-- Forms Validations Plugin -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/plugins/jquery.validate.min.js"></script>
+					<!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/plugins/jquery.bootstrap-wizard.js"></script>
+					<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/plugins/bootstrap-selectpicker.js"></script>
+					<!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/plugins/bootstrap-datetimepicker.min.js"></script>
+					<!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/plugins/jquery.dataTables.min.js"></script>
+					<!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/plugins/bootstrap-tagsinput.js"></script>
+					<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/plugins/jasny-bootstrap.min.js"></script>
+					<!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/plugins/fullcalendar.min.js"></script>
+					<!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/plugins/jquery-jvectormap.js"></script>
+					<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/plugins/nouislider.min.js"></script>
+					<!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+					<script
+						src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+					<!-- Library for adding dinamically elements -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/plugins/arrive.min.js"></script>
+					<!--  Google Maps Plugin    -->
+					<script
+						src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+					<!-- Chartist JS -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/plugins/chartist.min.js"></script>
+					<!--  Notifications Plugin    -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/plugins/bootstrap-notify.js"></script>
+					<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/js/material-dashboard.js?v=2.1.2"
+						type="text/javascript"></script>
+					<!-- Material Dashboard DEMO methods, don't include it in your project! -->
+					<script
+						src="http://localhost:8080/PhoneMart/resources/demo/demo.js"></script>
+					<script>
       $(document).ready(function () {
         $().ready(function () {
           $sidebar = $(".sidebar");
@@ -494,3 +439,4 @@
     </script>
 </body>
 </html>
+

@@ -12,6 +12,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import com.xoriant.modals.Order;
 import com.xoriant.modals.Phone;
 
 public class PhoneDaoImpl implements PhoneDao{
@@ -74,6 +75,21 @@ public class PhoneDaoImpl implements PhoneDao{
 		txn.commit(); 
 		session.close();
 		return phone;
+	}
+	@Override
+	public List<Phone> listPhonesByBrand(String Brand) {
+		Session session = factory.openSession();
+		Transaction txn = session.beginTransaction();
+		List<Phone> phones = null;
+
+		String hql = "from Phone ph  where ph.brand=:bd)";
+		TypedQuery<Phone> query=session.createQuery(hql);
+		query.setParameter("bd", Brand);
+		
+		phones = query.getResultList();
+		txn.commit(); 
+		session.close();
+		return phones;
 	}
 
 

@@ -36,26 +36,26 @@
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item active  ">
-            <a class="nav-link" href="dashboard">
+            <a class="nav-link" href="/PhoneMart/dashboard">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="addPhone">
+            <a class="nav-link" href="/PhoneMart/addPhone">
               <i class="material-icons">phone</i>
               <p>Add Phone</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="viewPhone">
+            <a class="nav-link" href="/PhoneMart/adminPhoneView">
               <i class="material-icons">smartphone</i>
               <p>View Phone</p>
             </a>
           </li>
           
           <li class="nav-item">
-              <a class="nav-link" href="adminOrder">
+              <a class="nav-link" href="/PhoneMart/adminOrderView">
                 <i class="material-icons">store</i>
                 <p>Manage Orders</p>
               </a>

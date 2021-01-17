@@ -57,29 +57,22 @@
         </div>
         <div class="sidebar-wrapper">
           <ul class="nav">
-            <li class="nav-item ">
-              <a class="nav-link" href="dashboard">
-                <i class="material-icons">dashboard</i>
-                <p>Dashboard</p>
+            <li class="nav-item  active ">
+              <a class="nav-link" href="/PhoneMart/home">
+                <i class="material-icons">home</i>
+                <p>Home</p>
               </a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" href="addPhone">
-                <i class="material-icons">phone</i>
-                <p>Add Phone</p>
+              <a class="nav-link" href="/PhoneMart/customerOrders">
+                <i class="material-icons">person</i>
+                <p>Orders</p>
               </a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="adminView">
-                <i class="material-icons">smartphone</i>
-                <p>View Phone</p>
-              </a>
-            </li>
-            
             <li class="nav-item">
-              <a class="nav-link" href="adminOrder">
-                <i class="material-icons">store</i>
-                <p>Manage Orders</p>
+              <a class="nav-link" href="/PhoneMart/customerCart">
+                <i class="material-icons">content_paste</i>
+                <p>Cart</p>
               </a>
             </li>
           </ul>
@@ -123,8 +116,62 @@
         <!-- End Navbar -->
         <div class="content">
           <div class="container-fluid">
+          
+          <div class="row">
+          <div class="col-md-3">
+                <div class="card card-chart">
+                  <div class="card-header card-header-image text-center">
+                    
+                    <img class="p-2 bg-white card-img-top mr-auto shadow-lg" alt="Bootstrap Thumbnail First" src="http://localhost:8080/PhoneMart/resources/brands/samsung.png" style="max-height: 150px; max-width: 120px">
+                  </div>
+                  <div class="card-body p-2 text-center">
+                    <h4 class="card-title "><a href="/PhoneMart/searchByBrand/Samsung">View Phone By Samsung</a></h4>
+                  </div>
+                </div>
+          </div>
+          
+           <div class="col-md-3">
+                <div class="card card-chart">
+                  <div class="card-header card-header-image text-center">
+                    
+                    <img class="p-2 bg-white card-img-top mr-auto shadow-lg" alt="Bootstrap Thumbnail First" src="http://localhost:8080/PhoneMart/resources/brands/apple.jpg" style="max-height: 150px; max-width: 120px">
+                  </div>
+                  <div class="card-body p-2 text-center">
+                    <h4 class="card-title "><a href="/PhoneMart/searchByBrand/Apple">View Phone By Apple</a></h4>
+                  </div>
+                </div>
+          </div>
+          
+           <div class="col-md-3">
+                <div class="card card-chart">
+                  <div class="card-header card-header-image text-center">
+                    
+                    <img class="p-2 bg-white card-img-top mr-auto shadow-lg" alt="Bootstrap Thumbnail First" src="http://localhost:8080/PhoneMart/resources/brands/oneplus.jpg" style="max-height: 150px; max-width: 120px">
+                  </div>
+                  <div class="card-body p-2 text-center">
+                    <h4 class="card-title "><a href="/PhoneMart/searchByBrand/OnePlus">View Phone By OnePlus</a></h4>
+                  </div>
+                </div>
+          </div>
+          
+           <div class="col-md-3">
+                <div class="card card-chart">
+                  <div class="card-header card-header-image text-center">
+                    
+                    <img class="p-2 bg-white card-img-top mr-auto shadow-lg" alt="Bootstrap Thumbnail First" src="http://localhost:8080/PhoneMart/resources/brands/xiomi.jpg" style="max-height: 150px; max-width: 120px">
+                  </div>
+                  <div class="card-body p-2 text-center">
+                    <h4 class="card-title "><a href="/PhoneMart/searchByBrand/Xiaomi">View Phone By Xiaomi</a></h4>
+                  </div>
+                </div>
+          </div>
+          
+          </div>
+          	
+          	
+          
             <div class="row">
-             
+             <hr class="w-100 mb-4"/>
               <c:if test="${not empty phones}">
 				        <c:forEach var=	"phone" items="${phones}" >
 
@@ -140,12 +187,12 @@
                       By ${phone.getBrand()}
                     </div>
                   <div class="card-footer">
-                    <span class="h5">
-                      <i class="fa fa-inr"></i> ${phone.getCost()} 
-                   </span>
-                  
-                    <a href="edit/${phone.getPhoneId()}" class="btn btn-outline-primary ml-auto">
-                      <i class="material-icons">create</i> Edit Phone
+                  <span class="h5">
+                  	 <i class="fa fa-inr"></i> ${phone.getCost()} &nbsp
+                  </span>
+                   
+                    <a href="/PhoneMart/viewPhone/${phone.getPhoneId()}" class="btn btn-outline-primary ml-auto">
+                      View Details
                     </a>
                   </div>
                 </div>

@@ -14,6 +14,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import com.xoriant.modals.Cart;
 import com.xoriant.modals.Login;
+import com.xoriant.modals.Order;
 import com.xoriant.modals.Phone;
 
 public class CartDaoImpl implements CartDao {
@@ -39,7 +40,13 @@ public class CartDaoImpl implements CartDao {
 
 	@Override
 	public void removeFromCart(Integer cartId) {
-		// TODO Auto-generated method stub
+		
+		Session session=factory.openSession();
+		Transaction txn=session.beginTransaction();
+		Cart cart = session.get(Cart.class, cartId);
+		session.delete(cart);
+		txn.commit();
+		session.close();
 		
 	}
 
@@ -51,12 +58,28 @@ public class CartDaoImpl implements CartDao {
 		Transaction txn=session.beginTransaction();
 		
 		// String hql="FROM Login L where L.userName=:u AND L.password=:p";
-		String hql = "from Phone pd  where pd.phoneId in (select cd.phoneId from Cart cd  where cd.customerId=:cid)";
+		String hql = "from Phone pd right join (select cd.phoneId from Cart cd where cd.customerId=:cid) as r on pd.phoneId = r.phoneId";
 		TypedQuery<Phone> query=session.createQuery(hql);
 		query.setParameter("cid", customerId);
 		
 		phones=query.getResultList();
 		return phones;
+	}
+
+	@Override
+	public List<Cart> fetchCartItems(Integer customerId) {
+		List<Cart> cartItems =null;
+		
+		Session session=factory.openSession();
+		Transaction txn=session.beginTransaction();
+		
+		// String hql="FROM Login L where L.userName=:u AND L.password=:p";
+		String hql = "from Cart ct where ct.customerId=:cid";
+		TypedQuery<Cart> query=session.createQuery(hql);
+		query.setParameter("cid", customerId);
+		
+		cartItems=query.getResultList();
+		return cartItems;
 	}
 	
 }

@@ -1,7 +1,5 @@
 package com.xoriant.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,62 +14,71 @@ import com.xoriant.modals.Address;
 import com.xoriant.modals.Customer;
 import com.xoriant.modals.Login;
 
+
+/**
+* Login Controller which handles URL End-Points 
+* 			POST GET	/login  
+* 			GET			/signUp
+* 			POST 		/customerHome  
+* @see      Views Rendered as per Url
+*/
+
 @Controller
 @SessionAttributes("customerId")
 public class LoginController {
 	
-	
-	@RequestMapping(value="/loginForm", method=RequestMethod.GET)
+	/**
+	* @return View Login 
+	*/
+	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public ModelAndView loginMethod() {
-		ModelAndView modelAndView=new ModelAndView("loginForm");
+		ModelAndView modelAndView=new ModelAndView("Login/login");
 		return modelAndView;
 	}
 	
+	/**
+	*
+	* @param  username  
+	* @param  password 
+	* @return      to home if Authentication succeed else return to login
+	*/
 	@RequestMapping(value="/customerHome",method=RequestMethod.POST)
 	public ModelAndView submitLoginForm(@RequestParam("userName") String userName,@RequestParam("password")String password, ModelMap model) {
-		ModelAndView modelAndView=new ModelAndView("customerHome");
-		Login login=new Login();
-		
-		login.setUserName(userName);
-		login.setPassword(password);
-		
-		System.out.println(userName);
-		System.out.println(password);
-		
-//		AuthenticateDaoImpl authenticateDaoImpl=new AuthenticateDaoImpl();
-//		System.out.println(authenticateDaoImpl.addLoginDetails(login));
-		
 		
 		AuthenticateDaoImpl authenticateDaoImpl=new AuthenticateDaoImpl();
-		Login login2=authenticateDaoImpl.authenticateUser(userName, password);
-		System.out.println(login2);
+		Login loginCheck = authenticateDaoImpl.authenticateUser(userName, password);
+		
+		if(loginCheck == null) {
+			return new ModelAndView("redirect:/login");
+		}
 
 		CustomerDaoImpl customerDaoImpl = new CustomerDaoImpl();
-		System.out.println();
 		
 		Customer customer = customerDaoImpl.fetchCustomer(userName);
 		model.addAttribute("customerId", customer.getCustId());
 		
-		modelAndView.addObject("msg", "Hello");
-		modelAndView.addObject("login",login);
-		
-		if(customer.getCustId() == 87) {
-			return new ModelAndView("redirect:/adminView");
+		if(customer.getCustId() == authenticateDaoImpl.getAdminId()) {
+			return new ModelAndView("redirect:/adminPhoneView");
 		}
 		
 		return new ModelAndView("redirect:/home");
-//		return modelAndView;
 	}
 	
-	@RequestMapping(value="/customerReg", method=RequestMethod.GET)
+	
+	/**
+	* @return  signUp page
+	*/
+	@RequestMapping(value="/signUp", method=RequestMethod.GET)
 	public ModelAndView RegistrationMethod() {
-		ModelAndView modelAndView=new ModelAndView("customerReg");
+		ModelAndView modelAndView=new ModelAndView("Login/signUp");
 		return modelAndView;
 	}
 	
-	
-	
-	@RequestMapping(value="/customerLogin",  method=RequestMethod.POST)
+	/**
+	* Form Submits 
+	* @return      to login page
+	*/
+	@RequestMapping(value="/login",  method=RequestMethod.POST)
 	public ModelAndView submitRegistrationForm(
 	        @RequestParam("name") String name,
 			@RequestParam("email") String email,
@@ -84,7 +91,7 @@ public class LoginController {
 			@RequestParam("password") String password
 			
    ){
-		ModelAndView modelAndView=new ModelAndView("loginForm");
+		ModelAndView modelAndView=new ModelAndView("Login/login");
 		Address address=new Address();
 		address.setHouseNo(houseNo);
 		address.setStreet(street);
@@ -100,18 +107,16 @@ public class LoginController {
 		customer.setAddress(address);
 		
 		address.setCustomer(customer);
-		//to add customer
-		CustomerDaoImpl customerDaoImpl=new CustomerDaoImpl();
-		System.out.println(customerDaoImpl.addCustomer(customer));
+		CustomerDaoImpl customerDaoImpl = new CustomerDaoImpl();
 		
+		customerDaoImpl.addCustomer(customer);
 		
-		//to add credential in login table
 		Login login=new Login();
 		login.setUserName(email);
 		login.setPassword(password);
-		AuthenticateDaoImpl authenticateDaoImpl=new AuthenticateDaoImpl();
-		System.out.println(authenticateDaoImpl.addLoginDetails(login));
 		
+		AuthenticateDaoImpl authenticateDaoImpl=new AuthenticateDaoImpl();
+		authenticateDaoImpl.addLoginDetails(login);
 		
 		return modelAndView;
 	}

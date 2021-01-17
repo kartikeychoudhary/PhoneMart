@@ -50,8 +50,12 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public void deleteOrder(Integer orderId) {
-		// TODO Auto-generated method stub
-		
+		Session session=factory.openSession();
+		Transaction txn=session.beginTransaction();
+		Order order = session.get(Order.class, orderId);
+		session.delete(order);
+		txn.commit();
+		session.close();
 	}
 
 	@Override
@@ -82,6 +86,7 @@ public class OrderDaoImpl implements OrderDao {
 		// String hql="FROM Login L where L.userName=:u AND L.password=:p";
 		String hql = "from Order ord  where ord.customerId=:cid)";
 		TypedQuery<Order> query=session.createQuery(hql);
+		
 		query.setParameter("cid", customerId);
 		
 		orders=query.getResultList();

@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
 	
 	<style type="text/css">
-    <%@include file="styles/style_login.css" %></style>
+    <%@include file="../../styles/style_login.css" %></style>
 
 </head>
 <body>
@@ -32,7 +32,7 @@
     <div class="d-flex justify-content-center h-100">
         <div class="card" style="height:auto;margin-top:50px">
             <div class="card-header">
-                <h3>Sign In</h3>
+                <h3>Sign Up</h3>
                 <div class="d-flex justify-content-end social_icon">
                     <span><i class="fab fa-facebook-square"></i></span>
                     <span><i class="fab fa-google-plus-square"></i></span>
@@ -41,7 +41,7 @@
             </div>
             <div class="card-body">
                 	
-                	<form action="/PhoneMart/customerLogin" method="post">
+                	<form action="/PhoneMart/login" method="post">
                 
                     <div class="input-group form-group">
                         <div class="input-group-prepend">

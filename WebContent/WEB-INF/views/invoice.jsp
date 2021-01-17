@@ -123,7 +123,7 @@ background:#eee;
                                                         ${customer.getName()}<br>
                                                         ${address.getHouseNo()}  ${address.getStreet()} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br> 
                                                         ${address.getCity()},  ${address.getPincode()}<br>
-                                                        <abbr title="Phone">P:</abbr>  ${customer.getContactNo()}
+                                                        <abbr title="Phone">PH : </abbr>  ${ contactNo }
                                                     </address>
                                                 </div>
                                                 <div class="col-6 text-right">
@@ -132,7 +132,7 @@ background:#eee;
                                                         ${customer.getName()}<br>
                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${address.getHouseNo()}  ${address.getStreet()}<br>
                                                         ${address.getCity()},  ${address.getPincode()}<br>
-                                                        <abbr title="Phone">P:</abbr>  ${customer.getContactNo()}
+                                                        <abbr title="Phone">PH : </abbr>  ${ contactNo }
                                                     </address>
                                                 </div>
                                             </div>
@@ -147,7 +147,7 @@ background:#eee;
                                                 <div class="col-xs-6 text-right">
                                                     <address>
                                                         <strong>Order Date:</strong><br>
-                                                        __/__/__
+                                                        18/01/2021
                                                     </address>
                                                 </div>
                                             </div>

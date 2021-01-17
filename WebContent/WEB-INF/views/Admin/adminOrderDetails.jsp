@@ -221,8 +221,8 @@
 
 									<div class="row w-100">
 										<div class="mx-auto">
-											<a href="phone/2" class="btn btn-danger"> Cancel order </a> <a
-												href="orderDetails" class="btn btn-info text-center mx-auto">
+											<a href="/PhoneMart/cancleOrderAdmin/${order.getOrderId()}" class="btn btn-danger"> Cancel order </a> <a
+												href="/PhoneMart/invoice/${order.getOrderId()}" class="btn btn-info text-center mx-auto">
 												Invoice </a>
 										</div>
 
