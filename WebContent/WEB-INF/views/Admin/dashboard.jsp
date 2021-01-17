@@ -110,7 +110,7 @@
                     <i class="material-icons">shopping_cart</i>
                   </div>
                   <p class="card-category">Total Orders</p>
-                  <h3 class="card-title">15
+                  <h3 class="card-title">${orders_size}
                     <small></small>
                   </h3>
                 </div>
@@ -128,9 +128,9 @@
                   <div class="card-icon">
                     <i class="material-icons">store</i>
                   </div>
-                  <p class="card-category">Revenue</p>
-                  <h3 class="card-title">$34,245</h3>
-                </div>
+                  <p class="card-category">Revenue (INR) </p>
+                  <h4 class="card-title"> ${ revenue }  </h4>
+                </div> 
                 <div class="card-footer">
                   <div class="stats">
                     <i class="material-icons">date_range</i> Last 24 Hours
@@ -145,7 +145,7 @@
                     <i class="material-icons">info_outline</i>
                   </div>
                   <p class="card-category">Canceled Orders</p>
-                  <h3 class="card-title">2</h3>
+                  <h3 class="card-title">${ cancelled }</h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
@@ -160,7 +160,7 @@
                     <i class="fa fa-user"></i>
                   </div>
                   <p class="card-category">Total Customers</p>
-                  <h3 class="card-title">+245</h3>
+                  <h3 class="card-title">${ customers_size }</h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">

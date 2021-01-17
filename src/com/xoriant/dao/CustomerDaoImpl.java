@@ -1,4 +1,6 @@
 package com.xoriant.dao;
+import java.util.List;
+
 import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
@@ -10,6 +12,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import com.xoriant.modals.Customer;
+import com.xoriant.modals.Order;
 
 
 public class CustomerDaoImpl implements CustomerDao {
@@ -66,6 +69,23 @@ public class CustomerDaoImpl implements CustomerDao {
 		txn.commit();
 		session.close();
 		return customer;
+	}
+
+	@Override
+	public List<Customer> fetchAllCustomers() {
+		List<Customer> customers = null;
+		Session session=factory.openSession();
+		Transaction txn=session.beginTransaction();
+		
+		String hql = "from Customer";
+		TypedQuery<Customer> query=session.createQuery(hql);
+		
+		customers=query.getResultList();
+		
+		txn.commit();
+		session.close();
+		
+		return customers;
 	}
 
 

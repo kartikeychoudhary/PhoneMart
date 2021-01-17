@@ -45,9 +45,34 @@ public class AdminController {
 		
 		PhoneDaoImpl phoneDao = new PhoneDaoImpl();
 		List<Phone> phones = phoneDao.listPhones();
-		System.out.print(phones.size());
 		
-		view.addObject("phones", phones);
+		OrderDaoImpl orderDaoImpl = new OrderDaoImpl();
+		List<Order> orders =  orderDaoImpl.fetchAllOrders();
+		
+		double revenue = 0;
+		int cancelled = 0;
+		
+		for (Order order : orders) {
+			revenue+=order.getBill();
+			System.out.println(order.getStatus());
+			
+			if(order.getStatus().equals("cancelled")) { 
+				cancelled+=1;
+			}
+		}
+		
+		System.out.println(cancelled);
+		
+		CustomerDaoImpl customerDaoImpl = new CustomerDaoImpl();
+		List<Customer> customers = customerDaoImpl.fetchAllCustomers();
+		
+		view.addObject("orders_size", orders.size());
+		view.addObject("customers_size", customers.size());
+		view.addObject("phones_size", phones.size());
+		view.addObject("revenue", revenue);
+		view.addObject("cancelled", cancelled);
+
+		
 		return view;
 	}
 	
